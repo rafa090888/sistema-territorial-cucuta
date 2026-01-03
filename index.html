@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema Territorial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h1>Sistema Territorial Electoral</h1>
+<p>Registro territorial con georreferenciación</p>
+
+<h2>Registro</h2>
+
+<input type="number" id="seguros" placeholder="Votos seguros"><br><br>
+<input type="number" id="probables" placeholder="Votos probables"><br><br>
+<input type="number" id="riesgo" placeholder="Votos en riesgo"><br><br>
+
+<button onclick="registrar()">Guardar información</button>
+
+<p id="estado"></p>
+
+<h2>Ubicación</h2>
+<p id="ubicacion">Ubicación no registrada</p>
+
+<h2>Mapa</h2>
+<div id="mapa" style="width:100%; height:300px; background:#ddd;">
+Mapa cargará aquí
+</div>
+
+<script>
+function registrar() {
+  if (!navigator.geolocation) {
+    document.getElementById("estado").innerText =
+      "El dispositivo no permite obtener la ubicación";
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      document.getElementById("ubicacion").innerText =
+        "Ubicación registrada correctamente";
+      document.getElementById("estado").innerText =
+        "Información guardada con éxito";
+    },
+    function() {
+      document.getElementById("estado").innerText =
+        "No fue posible obtener la ubicación";
+    }
+  );
+}
+</script>
+
+</body>
+</html>
